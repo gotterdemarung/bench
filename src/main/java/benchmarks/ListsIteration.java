@@ -8,8 +8,10 @@ import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.infra.Blackhole;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -18,41 +20,38 @@ import java.util.concurrent.TimeUnit;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 5, time = 2, timeUnit = TimeUnit.SECONDS)
 @Fork(1)
 @State(Scope.Benchmark)
-public class Lists {
+public class ListsIteration {
     @Param({"1000", "1000000"})
     public int items;
 
-    @Benchmark
-    public int arrayListAdd() {
-        ArrayList<String> data = new ArrayList<>();
-        String value = "foo";
+    private LinkedList<Integer> ll;
+    private ArrayList<Integer> al;
+
+    @Setup
+    public void setup() {
+        ll = new LinkedList<>();
+        al = new ArrayList<>(items);
         for (int i = 0; i < items; i++) {
-            data.add(value);
+            ll.add(i);
+            al.add(i);
         }
-        return data.size();
     }
 
     @Benchmark
-    public int arrayListPredefAdd() {
-        ArrayList<String> data = new ArrayList<>(items);
-        String value = "foo";
-        for (int i = 0; i < items; i++) {
-            data.add(value);
+    public void iterateArrayList(Blackhole bh) {
+        for (Integer i : al) {
+            bh.consume(i);
         }
-        return data.size();
     }
 
-
     @Benchmark
-    public int linkedListAdd() {
-        LinkedList<String> data = new LinkedList<>();
-        String value = "foo";
-        for (int i = 0; i < items; i++) {
-            data.add(value);
+    public void iterateLinkedList(Blackhole bh) {
+        for (Integer i : ll) {
+            bh.consume(i);
         }
-        return data.size();
     }
 }
+
