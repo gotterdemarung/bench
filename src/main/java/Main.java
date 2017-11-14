@@ -1,3 +1,4 @@
+import benchmarks.ConditionVsFilter;
 import benchmarks.Iteration;
 import benchmarks.Lists;
 import benchmarks.ListsIteration;
@@ -13,6 +14,7 @@ public class Main {
                 .include(Maps.class.getSimpleName())
                 .include(Iteration.class.getSimpleName())
                 .include(ListsIteration.class.getSimpleName())
+                .include(ConditionVsFilter.class.getSimpleName())
                 .forks(1)
                 .build();
 
