@@ -1,4 +1,5 @@
 /.idea/
+/dev/
 /target/
 /build/
 /*.iml
