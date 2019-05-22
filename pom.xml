@@ -12,9 +12,9 @@
         <!-- General encoding options -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Java compiler version -->
-        <javac.target>1.8</javac.target>
+        <javac.target>11</javac.target>
         <!-- JMH version to use with this project. -->
-        <jmh.version>1.19</jmh.version>
+        <jmh.version>1.21</jmh.version>
     </properties>
 
     <build>
