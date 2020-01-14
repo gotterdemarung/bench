@@ -1,4 +1,5 @@
 import benchmarks.ConditionVsFilter;
+import benchmarks.Freemarker;
 import benchmarks.Iteration;
 import benchmarks.Lists;
 import benchmarks.ListsIteration;
@@ -21,6 +22,7 @@ public class Main {
                 .include(ListsIteration.class.getSimpleName())
                 .include(ConditionVsFilter.class.getSimpleName())
                 .include(PatternVsStringReplaceAll.class.getSimpleName())
+                .include(Freemarker.class.getSimpleName())
                 .forks(1)
                 .build();
 
